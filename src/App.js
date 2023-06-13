@@ -1,7 +1,9 @@
 import React from 'react';
 import Location from './Location';
+import Header from './Header';
 import axios from 'axios';
 import Image from 'react-bootstrap/Image';
+import Alert from 'react-bootstrap/Alert';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 class App extends React.Component {
@@ -76,6 +78,7 @@ class App extends React.Component {
     
     return (
       <>
+       <Header></Header>
        <form onSubmit={this.handleCityInfo}>
         <label htmlFor=''> Enter City Name: 
           <input type="text" onInput={this.handleCity}/>
@@ -85,11 +88,13 @@ class App extends React.Component {
 
        
        <Image src={this.state.imgUrl} rounded />
+       
+       {this.state.error
+       ? <Alert variant="danger">{this.state.errMsg}</Alert>
+       : <p></p>
+       } 
        <Location
-        cityLocation={this.state.error
-        ? <p>{this.state.errMsg}</p>
-        : <p>{this.state.locationData.display_name}</p>
-        } 
+         cityLocation={this.state.locationData.display_name}
          lat={this.state.locationData.lat}  
          long={this.state.locationData.lon}> 
         </Location>
