@@ -129,6 +129,7 @@ class App extends React.Component {
        ? <Alert variant="danger">{this.state.errMsg}</Alert>
        : <p></p>
        } 
+
        <Location className='citycard'
          cityLocation={this.state.locationData.display_name}
          lat={this.state.locationData.lat}  
