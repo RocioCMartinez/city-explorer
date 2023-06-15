@@ -1,10 +1,13 @@
 import React from 'react';
 import Location from './Location';
 import Header from './Header';
+import Forecast from './Forecast';
 import axios from 'axios';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
+import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 class App extends React.Component {
   constructor(props){
@@ -18,7 +21,8 @@ class App extends React.Component {
       mapData: '',
       error: false,
       errMsg: '',
-      imgUrl: ''
+      imgUrl: '',
+      forecastInfo: []
     }
   }
 
@@ -45,8 +49,8 @@ class App extends React.Component {
         errMsg:'',
         imgUrl: `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API}&center=${axiosCityData.data[0].lat},${axiosCityData.data[0].lon}&zoom=12&size=<width>x<height>&format=<format>&maptype=<MapType>&markers=icon:<icon>|<latitude>,<longitude>&markers=icon:<icon>|<latitude>,<longitude>` 
         })
-
-      
+        
+        this.handleWeatherForecast(axiosCityData.data[0].lat, axiosCityData.data[0].lon);
 
       } catch (error){
        this.setState({
@@ -72,33 +76,58 @@ class App extends React.Component {
       
     }
 
+    handleWeatherForecast = async (lat, lon) => {
+      try {
+        let weatherURL = `${process.env.REACT_APP_SERVER}/weather?lat=${lat}&lon=${lon}&searchQuery=${this.state.city}`;
+        let weatherDataAxios = await axios.get(weatherURL);
+        let forecastInfo = weatherDataAxios.data;
+
+        this.setState({
+          forecastInfo,
+        });
+      } catch (error){
+
+        this.setState({
+          error: true,
+          errMsg: error.response.data.error
+        })
+      }
+    }
+
 
 
   render(){
     
     return (
-      <>
+      <div className='body'>
+
+
        <Header></Header>
-       <form onSubmit={this.handleCityInfo}>
-        <label htmlFor=''> Enter City Name: 
+       <form className='cityform' onSubmit={this.handleCityInfo}>
+         <label htmlFor=''> Enter City Name: 
           <input type="text" onInput={this.handleCity}/>
-        </label>
-        <button type="submit"> Explore! </button>
+         </label>
+         <Button variant="info" type="submit"> Explore! </Button>
        </form>
 
        
-       <Image src={this.state.imgUrl} rounded />
+       <Image className='map' src={this.state.imgUrl} rounded />
        
        {this.state.error
        ? <Alert variant="danger">{this.state.errMsg}</Alert>
        : <p></p>
        } 
-       <Location
+       <Location className='citycard'
          cityLocation={this.state.locationData.display_name}
          lat={this.state.locationData.lat}  
          long={this.state.locationData.lon}> 
         </Location>
-      </>
+        {this.state.forecastInfo.length > 0 && <Forecast className='weather' forecastInfo={this.state.forecastInfo}/>}
+
+
+
+
+      </div>
       
     )
   }
