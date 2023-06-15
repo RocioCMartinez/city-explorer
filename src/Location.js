@@ -1,5 +1,6 @@
 import React from 'react';
 import Card from 'react-bootstrap/Card';
+import './Location.css';
 
 class Location extends React.Component{
  
@@ -8,7 +9,7 @@ class Location extends React.Component{
   render(){
     return(
      <>
-       <Card style={{ width: '50rem' }} >
+       <Card className='citycard' style={{ width: '50rem' }} >
         <Card.Body>
          <Card.Title>{this.props.cityLocation}</Card.Title>
          <Card.Text>{this.props.lat}</Card.Text>
