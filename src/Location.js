@@ -4,8 +4,6 @@ import './Location.css';
 
 class Location extends React.Component{
  
- 
-
   render(){
     return(
      <>
@@ -13,7 +11,7 @@ class Location extends React.Component{
         <Card.Body>
          <Card.Title>{this.props.cityLocation}</Card.Title>
          <Card.Text>{this.props.lat}</Card.Text>
-         <Card.Text>{this.props.long}</Card.Text>
+         <Card.Text>{this.props.lon}</Card.Text>
         </Card.Body>
        </Card>
      </>

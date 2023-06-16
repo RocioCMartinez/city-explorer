@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from 'react-bootstrap/Table';
+import WeatherDay from './WeatherDay';
 
 
 
@@ -8,23 +9,24 @@ class Forecast extends React.Component {
     return (
       <>
         <h2>Weather Forecast</h2>
+        <Table striped bordered hover variant="dark" className='weather'>
+          <thead>
+            <tr>
+              <th>Date: </th>
+              <th>Weather:</th>
+            </tr>
+          </thead>
+          <tbody>
 
-        {this.props.forecastInfo.map((day, index) => {
-          return <Table striped bordered hover variant="dark" key={index} className='weather'>
-            <thead>
-              <tr>
-                <th>Date: </th>
-                <th>Weather:</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>{day.date}</td>
-                <td>{day.description}</td>
-              </tr>
-            </tbody>
-          </Table>
-        })};
+            {this.props.forecastInfo.map((day, index) => {
+              return(
+              
+              <WeatherDay day={day} index={index}></WeatherDay>
+               
+              )
+            })};
+          </tbody>
+        </Table>
       </>
     )
   }
