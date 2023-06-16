@@ -2,6 +2,7 @@ import React from 'react';
 import Location from './Location';
 import Header from './Header';
 import Forecast from './Forecast';
+import Movies from './Movies';
 import axios from 'axios';
 import Image from 'react-bootstrap/Image';
 import Alert from 'react-bootstrap/Alert';
@@ -22,7 +23,8 @@ class App extends React.Component {
       error: false,
       errMsg: '',
       imgUrl: '',
-      forecastInfo: []
+      forecastInfo: [],
+      movieData: []
     }
   }
 
@@ -51,6 +53,16 @@ class App extends React.Component {
         })
         
         this.handleWeatherForecast(axiosCityData.data[0].lat, axiosCityData.data[0].lon);
+
+        let movieURL = `${process.env.REACT_APP_SERVER}/movies?searchQuery=${this.state.city}`;
+
+        let movieDataFromAxios = await axios.get(movieURL);
+
+        // console.log(movieDataFromAxios.data);
+        this.setState({
+          movieData: movieDataFromAxios.data
+        
+        })
 
       } catch (error){
        this.setState({
@@ -104,7 +116,7 @@ class App extends React.Component {
 
        <Header></Header>
        <form className='cityform' onSubmit={this.handleCityInfo}>
-         <label htmlFor=''> Enter City Name: 
+         <label htmlFor=''> Enter City Name :   
           <input type="text" onInput={this.handleCity}/>
          </label>
          <Button variant="info" type="submit"> Explore! </Button>
@@ -124,7 +136,11 @@ class App extends React.Component {
         </Location>
         {this.state.forecastInfo.length > 0 && <Forecast className='weather' forecastInfo={this.state.forecastInfo}/>}
 
+        {this.state.movieData.length > 0 && <Movies className='movies' movieData={this.state.movieData}/>};
 
+
+
+       <footer>Author: Rocio Martinez </footer>
 
 
       </div>
