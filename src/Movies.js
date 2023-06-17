@@ -1,5 +1,6 @@
 import React from 'react';
-import ListGroup from 'react-bootstrap/ListGroup';
+import Movie from './Movie';
+
 
 
 class Movies extends React.Component{
@@ -12,10 +13,13 @@ class Movies extends React.Component{
 
       <h2>Movie Recommendations Related To Your City</h2>
         {this.props.movieData.map((movie, index) => {
-          return <ListGroup key={index} as="ol" >
-          <ListGroup.Item variant="primary">Movie Title: {movie.title}</ListGroup.Item>
-          <ListGroup.Item>Movie Description: {movie.overview}</ListGroup.Item>
-          </ListGroup>
+          return(
+            <Movie movie={movie} index={index}/>
+          )
+          //  <ListGroup key={index} as="ol" >
+          // <ListGroup.Item variant="primary">Movie Title: {movie.title}</ListGroup.Item>
+          // <ListGroup.Item>Movie Description: {movie.overview}</ListGroup.Item>
+          // </ListGroup>
 
         })}
       

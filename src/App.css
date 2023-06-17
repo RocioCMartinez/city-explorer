@@ -1,6 +1,6 @@
 
 .body {
-  background-color: rgb(200, 151, 86);
+  background-color: rgb(215, 167, 105);
   display: flexbox;
   justify-content: center;
   align-content: space-between;
@@ -8,7 +8,7 @@
 }
 
 .cityform {
-  padding-left: 40%;
+  padding-left: 45%;
   padding-bottom: 20px;
 }
 

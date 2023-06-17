@@ -116,28 +116,33 @@ class App extends React.Component {
 
        <Header></Header>
        <form className='cityform' onSubmit={this.handleCityInfo}>
-         <label htmlFor=''> Enter City Name :   
+         <label htmlFor=''> Enter City Name:  </label>
+         <br></br> 
           <input type="text" onInput={this.handleCity}/>
-         </label>
+         
+         <br></br>
          <Button variant="info" type="submit"> Explore! </Button>
        </form>
 
        
-       <Image className='map' src={this.state.imgUrl} rounded />
-       
-       {this.state.error
-       ? <Alert variant="danger">{this.state.errMsg}</Alert>
-       : <p></p>
-       } 
 
-       <Location className='citycard'
-         cityLocation={this.state.locationData.display_name}
-         lat={this.state.locationData.lat}  
-         long={this.state.locationData.lon}> 
-        </Location>
-        {this.state.forecastInfo.length > 0 && <Forecast className='weather' forecastInfo={this.state.forecastInfo}/>}
+        {this.state.error
+          ? <Alert variant="danger">{this.state.errMsg}</Alert>
+          : <p></p>
+        };
 
-        {this.state.movieData.length > 0 && <Movies className='movies' movieData={this.state.movieData}/>};
+        
+        <Location className='citycard'
+          cityLocation={this.state.locationData.display_name}
+          lat={this.state.locationData.lat}
+          lon={this.state.locationData.lon} 
+        />
+
+        <Image className='map' src={this.state.imgUrl} rounded />
+
+        {this.state.forecastInfo.length > 0 && <Forecast className='weather' forecastInfo={this.state.forecastInfo} />}
+
+        {this.state.movieData.length > 0 && <Movies className='movies' movieData={this.state.movieData} />}
 
 
 
