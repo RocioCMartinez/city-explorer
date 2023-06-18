@@ -17,13 +17,8 @@ class Forecast extends React.Component {
             </tr>
           </thead>
           <tbody>
-
             {this.props.forecastInfo.map((day, index) => {
-              return(
-              
-              <WeatherDay day={day} index={index}></WeatherDay>
-               
-              )
+              return<WeatherDay day={day} key={index}></WeatherDay>                          
             })};
           </tbody>
         </Table>

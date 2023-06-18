@@ -14,12 +14,8 @@ class Movies extends React.Component{
       <h2>Movie Recommendations Related To Your City</h2>
         {this.props.movieData.map((movie, index) => {
           return(
-            <Movie movie={movie} index={index}/>
+            <Movie movie={movie} key={index}/>
           )
-          //  <ListGroup key={index} as="ol" >
-          // <ListGroup.Item variant="primary">Movie Title: {movie.title}</ListGroup.Item>
-          // <ListGroup.Item>Movie Description: {movie.overview}</ListGroup.Item>
-          // </ListGroup>
 
         })}
       
